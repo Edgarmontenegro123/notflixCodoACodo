@@ -1,2 +1,0 @@
-# notflixCodoACodo
-Exercise clon Netflix
