@@ -1,13 +1,17 @@
 import axios from 'axios'
 
-export const API = {
-  baseUrl: 'https://api.themoviedb.org/3',
+// const apiKey = '?api_key=5fb4f9c2df2238897ac45fc16e8e5513'
+
+export const tmdb = {
+  urlBase: 'https://api.themoviedb.org/3',
   apiKey: '?api_key=5fb4f9c2df2238897ac45fc16e8e5513',
   entity: {
     topRatedMovies: '/movie/top_rated',
     topRatedTv: '/tv/top_rated',
     popularMovies: '/movie/popular',
     popularTv: '/tv/popular',
+    movieById: '/movie/',
+    tvById: '/tv/',
   },
   language: {
     en: '&language=en-US',
@@ -25,6 +29,70 @@ export const API = {
   }
 }
 
+export const apiQuality = {
+  posterSmall: 'posterSmall',
+  posterMedium: 'posterMedium',
+  posterLarge: 'posterLarge',
+  backdropSmall: 'backdropSmall',
+  backdropMedium: 'backdropMedium',
+  backdropLarge: 'backdropLarge',
+}
+
+export const apiEntity = {
+  topRatedMovies: 'topRatedMovies',
+  topRatedTv: 'topRatedTv',
+  popularMovies: 'popularMovies',
+  popularTv: 'popularTv',
+  movieById: 'movieById',
+  tvById: 'tvById',
+}
+
+export const apiLanguage = {
+  english: 'en',
+  spanish: 'es'
+}
+
+export const tryGetPopularMovies = async (page = 1) => {
+  try {
+    const res = await axios (
+      `https://api.themoviedb.org/3/movie/popular?api_key=5fb4f9c2df2238897ac45fc16e8e5513&language=en-US&page=${page}`
+    )
+    return res.data.results
+  }
+  catch (error) {
+    return error
+  }
+}
+
+// Otra forma
+
+export const apiBuilder = {
+  tryGet: async (entity, lang = 'es', page = 1) => {
+    const url = `${tmdb.urlBase}${tmdb.entity[entity]}${tmdb.apiKey}${tmdb.language[lang]}${tmdb.pagination}${page}`
+    try {
+      const res = await axios (url)
+      return res.data.results
+    }
+    catch (error) {
+      return error
+    }
+  }
+}
+
+export const tryGetById = async (entity, id, lang = 'es') => {
+  const url = `${tmdb.urlBase}${tmdb.entity[entity]}/${id}${tmdb.apiKey}${tmdb.language[lang]}`
+    try {
+      const res = await axios (url)
+      return res.data
+    }
+    catch (error) {
+      return error
+    }
+}
+
+
+
+/* 
 export const createUrl = {
   api: (entity, lang = 'es', page = 1) => {
     const url = `${API.baseUrl}${entity}${API.apiKey}${API.language[lang]}${API.pagination}${page}`
@@ -46,6 +114,7 @@ export const services = {
 }
 
 services.get(API.entity.topRatedMovies, 'en', 1)
+ */
 
 
 

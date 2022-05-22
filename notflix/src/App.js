@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react'
+import { apiEntity } from './apiConfig';
+import useApi from './useApi'
 
-function App() {
+  function App() {
+
+    const [movies, loading, error, handleNext] = useApi(apiEntity.popularMovies)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Películas</h1>
+      {loading && <p>Cargando...</p>}
+      {error && <p>{error}</p>}
+      {
+        movies.map((movie) => (
+          <div key = {movie.id}>
+            <h2>{movie.title}</h2>
+          </div>
+        ))
+      }
+      <button onClick = {handleNext}>Next</button>
+    </>
   );
 }
 
