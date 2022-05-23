@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react'
-import {apiBuilder, apiLanguage, apiEntity} from './apiConfig'
+import {useState, useEffect} from 'react';
+import {apiBuilder, apiLanguage} from './apiConfig';
 
 
 const useApi = (entity, lang = apiLanguage.spanish, pagination = 1) => {
@@ -14,31 +14,26 @@ const useApi = (entity, lang = apiLanguage.spanish, pagination = 1) => {
     setLoading(true)
     setError(null)
 
-    const res = await apiBuilder.tryGet(entity, lang, page)
-    const data = res.data.results
-    console.log(res.data.results)
+    const res = await apiBuilder.tryGet(entity, lang, page);
 
     if(res.status === 200) {
-      setValues(data)
+      setValues(res.data.results);
     }
     else {
-      setError(res.message)
-      console.log(res)
+      setError(res.message);
     }
-    setLoading(false)
+    setLoading(false);
   }
 
   useEffect(() => {
     getData()
-  }, [page])
+  }, [page]);
 
   const handleNext = () => {
     setPage(page + 1)
-  }
+  };
 
-  return [values, loading, error, handleNext]
+  return [values, loading, error, handleNext];
 }
 
-export default useApi
-
-  
+export default useApi;
