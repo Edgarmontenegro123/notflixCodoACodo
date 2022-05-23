@@ -1,24 +1,23 @@
-import React, {useState, useEffect} from 'react'
 import { apiEntity } from './apiConfig';
-import useApi from './useApi'
+import useApi from './useApi';
 
   function App() {
 
-    const [movies, loading, error, handleNext] = useApi(apiEntity.popularMovies)
+    const [movies, loading, error, handleNext] = useApi(apiEntity.popularMovies);
 
   return (
     <>
       <h1>Películas</h1>
+      <button onClick = {handleNext}>Next</button>
       {loading && <p>Cargando...</p>}
       {error && <p>{error}</p>}
       {
         movies.map((movie) => (
           <div key = {movie.id}>
-            <h2>{movie.title}</h2>
+            <h3>{movie.title}</h3>
           </div>
         ))
       }
-      <button onClick = {handleNext}>Next</button>
     </>
   );
 }
