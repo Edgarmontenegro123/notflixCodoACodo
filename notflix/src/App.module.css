@@ -1,0 +1,19 @@
+.title {
+  color: red;
+  margin-left: 2rem;
+}
+
+.content {
+  margin-left: 2rem;
+}
+
+.button {
+  margin-left: 2rem;
+  border-radius: 6px;
+  color: whitesmoke;
+  background-color: rgb(69, 69, 255);
+}
+
+.margin {
+  margin-left: 2rem;
+}
