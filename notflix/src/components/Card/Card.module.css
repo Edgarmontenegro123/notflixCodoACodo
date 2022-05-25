@@ -1,6 +1,7 @@
 .card {
   margin: 0.2em;
   height: 150px;
+  background-color: blue;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
