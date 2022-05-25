@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { apiBuilder } from '../../apiConfig';
 import Styles from './Card.module.css';
 
-const Card = () => {
+const Card = ({title, imgPath}) => {
+  const [img, setImg] = useState(null);
+
+  useEffect(() => {
+    const url = apiBuilder.tryGetPoster(imgPath);
+    setImg(url);
+  }, [imgPath])
+
   return (
     <div>
-      <div /* className = {Styles.card} */ style={{backgroundColor: 'red'}}></div>
-      <h1>Título</h1>
-      <h2>Esto es un Carousel!</h2>
+      <div style={{
+        backgroundImage: `url(${img})`,
+        }} 
+        className = {Styles.card} >
+        <h1>{title}</h1>
+      </div>
     </div>
   )
 }
